@@ -1,0 +1,15 @@
+@url=http://localhost:3000
+@contentType = application/json
+
+
+### home
+GET {{url}}
+
+### post
+POST {{url}}/posts 
+Content-Type: {{contentType}}
+
+{
+  "title":"title 01",
+  "body":"body 01"
+}
