@@ -44,17 +44,16 @@ func (q *Queries) GetAccount(ctx context.Context, id int64) (Account, error) {
 }
 
 const getAccountList = `-- name: GetAccountList :many
-SELECT id, holder, balance FROM account
-where id>=$1::bigint AND id<=$2::bigint
+select id, holder, balance from account where id > $1::bigint limit $2::bigint
 `
 
 type GetAccountListParams struct {
-	FromID int64 `json:"from_id"`
-	ToID   int64 `json:"to_id"`
+	LastID    int64 `json:"last_id"`
+	PageLimit int64 `json:"page_limit"`
 }
 
 func (q *Queries) GetAccountList(ctx context.Context, arg GetAccountListParams) ([]Account, error) {
-	rows, err := q.db.QueryContext(ctx, getAccountList, arg.FromID, arg.ToID)
+	rows, err := q.db.QueryContext(ctx, getAccountList, arg.LastID, arg.PageLimit)
 	if err != nil {
 		return nil, err
 	}

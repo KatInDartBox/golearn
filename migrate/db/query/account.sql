@@ -1,6 +1,5 @@
 -- name: GetAccountList :many
-SELECT * FROM account
-where id>=sqlc.arg(from_id)::bigint AND id<=sqlc.arg(to_id)::bigint;
+select * from account where id > sqlc.arg(last_id)::bigint limit sqlc.arg(page_limit)::bigint;
 
 -- name: GetAccount :one
 SELECT * FROM account

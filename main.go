@@ -11,5 +11,9 @@ var qty sqlc.Queries
 
 func main() {
 	fmt.Println("start programming")
+	x := false
 
+	if !x {
+		fmt.Println("ok is false")
+	}
 }
