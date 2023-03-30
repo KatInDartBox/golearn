@@ -1,0 +1,45 @@
+@url=http://localhost:5000
+@contentType = application/json
+
+
+### home
+GET {{url}}
+
+### get account
+GET {{url}}/account/1
+
+### create account
+POST {{url}}/account 
+
+{
+  "holder":"holder 004",
+  "balance":15
+}
+
+### get account list
+
+GET {{url}}/account?pageLimit=10
+
+### get account list from last id
+GET {{url}}/account?lastId=995&pageLimit=10
+
+
+
+### custome validation
+### bookabledate
+POST {{url}}/validation
+
+{
+  "checkIn":"2023-02-23T00:00:00Z",
+  "checkOut":"2023-02-22T00:00:00Z"
+}
+ 
+### default form
+GET {{url}}/validation/defaultForm?name=jack
+
+### bookabledate
+POST {{url}}/validation/defaultJson
+
+{
+  "name":"jimbo"
+}
