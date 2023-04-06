@@ -1,19 +1,16 @@
 package utils
 
 import (
-	"api-test/utils/setDefault"
+	"learn/utils/setDefault"
 	"log"
 )
 
 func LogError(err error, msgs ...string) {
 	var errMsg string
-	if len(msgs) <=1{
-		setDefault.Str(&errMsg,"log Error!")
+	if len(msgs) <= 1 {
+		setDefault.Str(&errMsg, "log Error!")
 	}
 
-	 
-	
-	 
 	if err != nil {
 		log.Fatal(errMsg)
 	}
@@ -21,5 +18,5 @@ func LogError(err error, msgs ...string) {
 
 		log.Println(msgs[1])
 	}
-	
+
 }

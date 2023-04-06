@@ -44,7 +44,9 @@ func (q *Queries) GetAccount(ctx context.Context, id int64) (Account, error) {
 }
 
 const getAccountList = `-- name: GetAccountList :many
-select id, holder, balance from account where id > $1::bigint limit $2::bigint
+select id, holder, balance from account 
+where id > $1::bigint 
+limit $2::bigint
 `
 
 type GetAccountListParams struct {
@@ -58,7 +60,7 @@ func (q *Queries) GetAccountList(ctx context.Context, arg GetAccountListParams) 
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Account
+	items := []Account{}
 	for rows.Next() {
 		var i Account
 		if err := rows.Scan(&i.ID, &i.Holder, &i.Balance); err != nil {

@@ -1,8 +1,8 @@
 package initer
 
 import (
-	"api-test/db/sqlc"
 	"database/sql"
+	"learn/db/sqlc"
 	"log"
 
 	_ "github.com/jackc/pgx/v5/stdlib"

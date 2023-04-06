@@ -1,5 +1,4 @@
 version: "2"
- 
 sql:
   - engine: "postgresql"
     queries: "./migrate/db/query/"
@@ -10,9 +9,13 @@ sql:
         out: "./db/sqlc" #directory sqlc generate to
         emit_json_tags: true
         emit_prepared_queries: false
-        emit_interface: false
+        emit_interface: true
         emit_exact_table_names: false
         emit_pointers_for_null_types: true
+        emit_empty_slices: true #return [] instead of null
+        # sql_package: "pgx/v5" #experimental flag is needed
+
+              
 
           
         

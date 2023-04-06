@@ -1,19 +1,24 @@
 package main
 
 import (
-	"api-test/db/sqlc"
-	"database/sql"
 	"fmt"
+	// "learn/utils/uToken"
+	// "time"
+	// "aidanwoods.dev/go-paseto"
 )
 
-var test sql.DB
-var qty sqlc.Queries
-
 func main() {
-	fmt.Println("start programming")
-	x := false
+	str := "abc123456"
 
-	if !x {
-		fmt.Println("ok is false")
+	strStrip := str[3:]
+
+	fmt.Println(str)
+	fmt.Println(strStrip)
+
+}
+
+func panicIf(err error) {
+	if err != nil {
+		panic(err)
 	}
 }

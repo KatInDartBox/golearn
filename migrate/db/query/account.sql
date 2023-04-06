@@ -1,5 +1,8 @@
 -- name: GetAccountList :many
-select * from account where id > sqlc.arg(last_id)::bigint limit sqlc.arg(page_limit)::bigint;
+select * from account 
+where id > sqlc.arg(last_id)::bigint 
+limit sqlc.arg(page_limit)::bigint ;
+
 
 -- name: GetAccount :one
 SELECT * FROM account
@@ -18,3 +21,9 @@ INSERT INTO account (
   $1, $2
 )
 RETURNING *;
+
+
+
+
+-- array list work with "github.com/lib/pq" by default
+-- select * from account where id=ANY($1::int[]);

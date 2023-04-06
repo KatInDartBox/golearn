@@ -1,8 +1,8 @@
 package server
 
 import (
-	"api-test/db/sqlc"
 	"github.com/gin-gonic/gin"
+	"learn/db/sqlc"
 )
 
 type Server struct {
@@ -24,6 +24,10 @@ func NewServer(store *sqlc.Queries) *Server {
 	routeCustomeValidation.POST("/", server.postBooking)
 	routeCustomeValidation.GET("/defaultForm", server.getDefaultForm)
 	routeCustomeValidation.POST("/defaultJson", server.getDefaultJson)
+
+	routeToken := router.Group("/token")
+	routeToken.GET("/", server.getToken)
+	routeToken.POST("/", server.getTokenDecryption)
 
 	router.GET("/", server.getHome)
 	return server

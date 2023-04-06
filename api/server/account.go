@@ -1,7 +1,7 @@
 package server
 
 import (
-	"api-test/db/sqlc"
+	"learn/db/sqlc"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -28,6 +28,7 @@ func (server *Server) createAccount(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, errResponse(err))
 		return
 	}
+	acc.ID = 0
 	ctx.JSON(http.StatusOK, acc)
 }
 
@@ -56,6 +57,7 @@ type getAccountsRequest struct {
 }
 
 func (server *Server) getAccountList(ctx *gin.Context) {
+	// set default lastId=0
 	req := getAccountsRequest{
 		LastId: 0,
 	}

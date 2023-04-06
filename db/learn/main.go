@@ -1,10 +1,10 @@
 package main
 
 import (
-	"api-test/db/learn/initialDB"
-	"api-test/db/sqlc"
 	"context"
 	"database/sql"
+	"learn/db/learn/initialDB"
+	"learn/db/sqlc"
 
 	"fmt"
 
@@ -366,8 +366,8 @@ func createAccount() {
 	logDB("create account", acc)
 
 	argList := sqlc.GetAccountListParams{
-		FromID: 1,
-		ToID:   4}
+		LastID:    0,
+		PageLimit: 10}
 	accList, err := Qry.GetAccountList(context.Background(), argList)
 	panicErr(err)
 	logDB("get account list", accList)

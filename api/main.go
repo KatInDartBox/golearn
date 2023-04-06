@@ -1,14 +1,15 @@
 package main
 
 import (
-	"api-test/api/initer"
-	"api-test/api/server"
+	"learn/api/initer"
+	"learn/api/server"
 	"log"
 )
 
 func init() {
 	initer.InitDB()
 	initer.AddBookableDate()
+	initer.InitKeyToken()
 }
 
 func main() {

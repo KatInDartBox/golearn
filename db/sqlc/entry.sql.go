@@ -56,27 +56,43 @@ func (q *Queries) GetEntry(ctx context.Context, id int64) (Entry, error) {
 }
 
 const getEntryList = `-- name: GetEntryList :many
-SELECT id, account_id, amount, note FROM entry
-where id>=$1::bigint AND id<=$2::bigint
+SELECT ac.id,ac.holder,ac.balance,
+en.amount,en.note
+FROM "account" as ac 
+INNER JOIN "entry" as en
+on ac.id = en."account_id"
+where ac.id = $1::bigint
+and en.id > $2::bigint
+limit $3
 `
 
 type GetEntryListParams struct {
-	FromID int64 `json:"from_id"`
-	ToID   int64 `json:"to_id"`
+	AccountID   int64 `json:"account_id"`
+	EntryLastID int64 `json:"entry_last_id"`
+	PageSize    int32 `json:"page_size"`
 }
 
-func (q *Queries) GetEntryList(ctx context.Context, arg GetEntryListParams) ([]Entry, error) {
-	rows, err := q.db.QueryContext(ctx, getEntryList, arg.FromID, arg.ToID)
+type GetEntryListRow struct {
+	ID      int64  `json:"id"`
+	Holder  string `json:"holder"`
+	Balance int64  `json:"balance"`
+	Amount  int64  `json:"amount"`
+	Note    string `json:"note"`
+}
+
+func (q *Queries) GetEntryList(ctx context.Context, arg GetEntryListParams) ([]GetEntryListRow, error) {
+	rows, err := q.db.QueryContext(ctx, getEntryList, arg.AccountID, arg.EntryLastID, arg.PageSize)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Entry
+	items := []GetEntryListRow{}
 	for rows.Next() {
-		var i Entry
+		var i GetEntryListRow
 		if err := rows.Scan(
 			&i.ID,
-			&i.AccountID,
+			&i.Holder,
+			&i.Balance,
 			&i.Amount,
 			&i.Note,
 		); err != nil {
