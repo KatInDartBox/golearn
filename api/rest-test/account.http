@@ -1,27 +1,32 @@
 @url=http://localhost:5000
 @contentType = application/json
-
+@token = Bearer hKtHtRGQhVApQp67jXzjtbXnyJlDz1UlCEYg1jhX9kisrBDa42-MGOEdV7AmeUtt492DnKZhBnduTUjIb0FglU_TlRZg84xaSkHo0Ylf-LMSGGzD8o-dtlcM9vKW-w6gLvANvqiT7K2v8k80MmRIME_hA4WAaCwvn1om2aUWfW7Xm_h4tzBf5rK832nz5KpiLuAPU3ss
 
 ### home
 GET {{url}}
 
 ### get account
-GET {{url}}/account/1
+GET {{url}}/account/1234
+Authorization: {{token}}
+
+### get account list
+
+GET {{url}}/account?pageLimit=10
+Authorization: {{token}}
+
+### get account list from last id
+GET {{url}}/account?lastId=1200&pageLimit=10
+Authorization: {{token}}
 
 ### create account
 POST {{url}}/account 
+Authorization: {{token}}
 
 {
   "holder":"holder 005",
   "balance":15
 }
 
-### get account list
-
-GET {{url}}/account?pageLimit=10
-
-### get account list from last id
-GET {{url}}/account?lastId=1200&pageLimit=10
 
 
 
@@ -30,14 +35,14 @@ GET {{url}}/account?lastId=1200&pageLimit=10
 POST {{url}}/validation
 
 {
-  "checkIn":"2023-02-23T00:00:00Z",
-  "checkOut":"2023-02-22T00:00:00Z"
+  "checkIn":"2023-05-23T00:00:00Z",
+  "checkOut":"2023-06-22T00:00:00Z"
 }
  
 ### default form
 GET {{url}}/validation/defaultForm?name=jack
 
-### bookabledate
+### default json
 POST {{url}}/validation/defaultJson
 
 {
@@ -53,5 +58,5 @@ GET {{url}}/token
 POST {{url}}/token
 
 {
-  "enc":"jvgqa_fdMiYTMXVQI6imrPaEgHt2LNmcmIYnMvvJHG9PO_nIpmaT8x0jKT2kEReQjURWLcLSsTM8mMPpSL-4fs1VhBH4am2wUfOxzw5Cxl0BUTPF4PgKcxmUi2i1J72B7BjSeqza140mO9yzHfenY7tXyQ-RYXUEx2HGtYViVojNM1eiU2A0oDqyFTMDUjcJ0_erqwA3QN_RUGvkBSc"
+  "enc":"Jg214vNSpS7fAk9tpD1D7FFw2DJIjjLDFJ3A7icK4Tcbj7nrZfxWFxQHpdDjKhtuU9lvnCQpWP6Of5nmlcD8cACEIl01n0Hi8BxqzmvWd4LN1HmO2JeF7vLn5DHVkERolkRFVXl_J6eIHHwFKjdRsDg4E1QhryyG7Vpu6TgMsdGA-OoV5KJRmd3FXchAZoxo9vrbuslCrYPK6KyXPZ0"
 }

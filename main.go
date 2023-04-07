@@ -2,19 +2,21 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	// "learn/utils/uToken"
 	// "time"
 	// "aidanwoods.dev/go-paseto"
 )
 
 func main() {
-	str := "abc123456"
+	str := "abc 123456"
 
-	strStrip := str[3:]
+	fields := strings.Fields(str)
 
-	fmt.Println(str)
-	fmt.Println(strStrip)
+	error := fmt.Errorf("fields %v", fields)
+	panicIf(error)
 
+	fmt.Println("after error f")
 }
 
 func panicIf(err error) {

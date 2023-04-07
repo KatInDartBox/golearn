@@ -11,7 +11,7 @@ import (
 
 func (server *Server) getToken(ctx *gin.Context) {
 	payload := uToken.Payload{
-		Id:   90101293123,
+		Id:   123,
 		Name: "some jakk ji",
 	}
 

@@ -15,10 +15,7 @@ func NewServer(store *sqlc.Queries) *Server {
 	server := &Server{store: store}
 	server.router = router
 
-	routeAccount := router.Group("/account")
-	routeAccount.POST("/", server.createAccount)
-	routeAccount.GET("/:id", server.getAccount)
-	routeAccount.GET("/", server.getAccountList)
+	server.setAccountRoute()
 
 	routeCustomeValidation := router.Group("/validation")
 	routeCustomeValidation.POST("/", server.postBooking)
@@ -31,6 +28,10 @@ func NewServer(store *sqlc.Queries) *Server {
 
 	router.GET("/", server.getHome)
 	return server
+}
+
+func setAccountRoute(router *gin.Engine) {
+
 }
 
 func (server *Server) Start(address string) error {
